@@ -8,7 +8,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='36' r='24' fill='%23a83a0a'/%3E%3Cpath d='M18 30l9 0-4-9zM37 30h9l-5-9zM17 42l8 7 7-6 7 6 8-7-3 12H20z' fill='%23ffd60a'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Eater&family=Nosifer&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="haunted-harvest.css">
 </head>
 <body>
@@ -60,6 +60,12 @@
       <path class="whisk" d="M112-62 150-70M112-58 152-56M112-54 148-42"/>
     </g></g></g>
 
+
+  <g id="devil"><path class="flame" d="M-36 2Q-30-30-22 2Q-16-42-8 2Q0-54 8 2Q15-38 22 2Q29-28 36 2Z"/><path class="ln" stroke-width="3" d="M14-34Q48-28 42-62L50-58 44-68 38-60"/><path class="ln" stroke-width="3" d="M36-8V-126M27-126V-108Q36-98 45-108V-126M36-126V-140"/><path class="sil rim" d="M-17-42Q-24-92 0-98Q24-92 17-42L22 0H-22Z"/><path class="ln" stroke-width="7" d="M-16-80-34-52M16-80 30-96"/><circle class="sil rim" cy="-108" r="15"/><path class="sil rim" d="M-11-118-26-148-5-124ZM11-118 26-148 5-124Z"/><ellipse class="eyeglow" cx="-6" cy="-110" rx="4" ry="2.6"/><ellipse class="eyeglow" cx="6" cy="-110" rx="4" ry="2.6"/><path class="fang" d="M-9-101Q0-94 9-101L5-98 3-94 0-98-3-94-5-98Z"/></g>
+  <g id="corn"><path class="cc1" d="M-9 0H9L7-10H-7Z"/><path class="cc2" d="M-7-10H7L4-20H-4Z"/><path class="cc3" d="M-4-20H4L0-32Z"/></g>
+  <g id="cornpile"><use href="#corn" x="-16"/><use href="#corn" x="0" y="2"/><use href="#corn" x="16"/><use href="#corn" x="-8" y="-12"/><use href="#corn" x="9" y="-12"/></g>
+  <g id="spidercrawl"><g class="mv slow"><g class="bob"><g class="legs"><path class="ln" stroke-width="2" d="M-4-3-15-13M-2-4-9-15M2-4 7-15M5-3 15-13M-4 3-15 13M-2 4-9 15M2 4 7 15M5 3 15 13"/></g><circle class="sil" r="7"/><circle class="sil" cx="9" r="4.5"/><circle class="eyeglow" cx="11" cy="-1.5" r="1.3"/><circle class="eyeglow" cx="11" cy="1.5" r="1.3"/></g></g></g>
+  <g id="ghostfly"><g class="mv"><g class="bobY"><use href="#ghost"/></g></g></g>
   <!-- animated compounds (motion is set in haunted-harvest.css) -->
   <g id="batfly"><g class="mv"><g class="bobY"><g class="flap"><use href="#bat"/></g></g></g></g>
   <g id="crowfly"><g class="mv"><g class="bobY"><g class="flap"><use href="#crow"/></g></g></g></g>
@@ -98,10 +104,10 @@
       <use href="#batfly" x="600" y="110" style="--t:11s;--d:-2s" class="sil"/>
       <use href="#batfly" x="500" y="260" style="--t:14s;--d:-7s;--dir:reverse" class="sil"/>
       <use href="#batfly" x="900" y="180" style="--t:9s;--d:-5s" class="sil"/>
-      <ellipse class="cloud drift" cx="300" cy="80" rx="320" ry="36" style="--t:50s"/>
+      <use href="#witchfly" x="0" y="230" style="--t:26s;--d:-9s" class="sil"/><use href="#ghostfly" x="0" y="300" style="--t:30s;--d:-6s"/><use href="#ghostfly" x="0" y="200" style="--t:38s;--d:-22s"/><ellipse class="cloud drift" cx="300" cy="80" rx="320" ry="36" style="--t:50s"/>
       <ellipse class="cloud drift" cx="900" cy="130" rx="280" ry="30" style="--t:70s;--d:-20s"/>
       <path class="bolt" d="M960 100 930 210 962 204 920 330 988 190 954 196Z"/>
-      <use href="#mansion" x="780" y="500" class="sil2"/>
+      <use href="#mansion" x="780" y="500" class="sil2"/><g class="devilg" style="--eye:#ff1a1a"><use href="#devil" transform="translate(880 176) scale(.5)"/></g>
       <rect class="win fl" x="874" y="250" width="12" height="22"/><rect class="win fl" x="980" y="330" width="14" height="24" style="--d:-.8s"/>
       <rect class="win fl" x="810" y="390" width="14" height="24" style="--d:-1.3s"/><rect class="win fl" x="1030" y="410" width="14" height="24" style="--d:-.3s"/>
       <path class="sil fig" d="M984 340a3 3 0 1 1 6 0l2 14h-10z"/><rect class="win door" x="910" y="440" width="24" height="60"/>
@@ -109,15 +115,15 @@
       <path class="gnd" d="M0 505Q300 485 600 505T1200 498V600H0Z"/>
       <rect class="sil2" x="50" y="462" width="300" height="60" rx="4"/><rect class="sil2" x="40" y="454" width="320" height="10" rx="3"/>
       <g class="boo" tabindex="0" role="button" aria-label="A hissing black cat. Hover or focus to provoke it."><use href="#scarycat" transform="translate(190 454) scale(.85)"/></g>
-      <g class="fl"><use href="#jack" x="860" y="492" transform="scale(1)"/></g>
-      <g class="fl" style="--d:-.6s"><use href="#jack" x="1010" y="498"/></g>
-      <g class="fl" style="--d:-1.1s"><use href="#jack" x="80" y="500"/></g>
+      <g class="fl"><g class="evil"><use href="#jack" x="860" y="492" transform="scale(1)"/></g></g>
+      <g class="fl" style="--d:-.6s"><g class="evil"><use href="#jack" x="1010" y="498"/></g></g>
+      <g class="fl" style="--d:-1.1s"><g class="evil"><use href="#jack" x="80" y="500"/></g></g>
       <use href="#kidwalk" x="200" y="490" style="--t:30s;--d:-3s"/>
       <use href="#kidwalk" x="120" y="505" style="--t:30s;--d:-5.2s"/>
       <use href="#kidwalk" x="300" y="495" style="--t:30s;--d:-7s"/>
       <use href="#catwalk" x="420" y="540" style="--t:22s;--d:-9s"/>
       <use href="#hearse" x="560" y="590" style="--t:15s;--d:-8s"/>
-      <ellipse class="fog drift" cx="300" cy="520" rx="420" ry="48" style="--t:35s"/>
+      <g class="cornhop"><use href="#cornpile" x="520" y="548"/></g><use href="#spidercrawl" x="0" y="570" style="--t:16s;--d:-5s"/><use href="#spidercrawl" x="0" y="550" style="--t:24s;--d:-14s"/><ellipse class="fog drift" cx="300" cy="520" rx="420" ry="48" style="--t:35s"/>
       <ellipse class="fog drift" cx="900" cy="560" rx="460" ry="56" style="--t:48s;--d:-14s"/>
       <g class="fall" style="--d:-2s"><use href="#leaf" x="100" y="0"/></g><g class="fall" style="--t:12s;--d:-6s"><use href="#leaf" x="420" y="0"/></g><g class="fall" style="--t:8s;--d:-4s"><use href="#leaf" x="700" y="0"/></g>
       <rect class="flash" width="1200" height="600"/>
@@ -137,7 +143,7 @@
       <use href="#crowfly" x="200" y="120" style="--t:22s;--d:-6s" class="sil"/>
       <use href="#batfly" x="700" y="220" style="--t:10s;--d:-3s" class="sil"/>
       <use href="#batfly" x="400" y="90" style="--t:13s;--d:-9s;--dir:reverse" class="sil"/>
-      <g class="sway"><use href="#tree" x="90" y="510"/></g>
+      <use href="#witchfly" x="0" y="170" style="--t:15s;--d:-3s" class="sil"/><use href="#witchfly" x="0" y="260" style="--t:27s;--d:-16s" class="sil"/><use href="#ghostfly" x="0" y="330" style="--t:34s;--d:-12s"/><g class="sway"><use href="#tree" x="90" y="510"/></g>
       <g class="sway" style="--d:-2s"><use href="#tree" x="1090" y="520" transform="scale(1.1)"/></g>
       <use href="#eyes" x="92" y="400" class="blinkeyes"/><use href="#eyes" x="1040" y="430" class="blinkeyes" style="--d:-6s"/><use href="#eyes" x="640" y="452" class="blinkeyes" style="--d:-3s"/>
       <use href="#spider" x="690" y="0" class="dangle sil2"/>
@@ -145,7 +151,7 @@
       <g class="hand" style="--d:-2s"><use href="#hand" x="430" y="520"/></g>
       <g class="hand" style="--d:-5s"><use href="#hand" x="780" y="525"/></g>
       <path class="gnd" d="M0 520Q300 505 600 520T1200 515V600H0Z"/>
-      <rect class="sil2" x="320" y="478" width="230" height="44" rx="4"/>
+      <g class="devilg rise" style="--eye:#ff1a1a"><use href="#devil" transform="translate(720 540) scale(1.15)"/></g><rect class="sil2" x="320" y="478" width="230" height="44" rx="4"/>
       <g class="boo" tabindex="0" role="button" aria-label="A hissing black cat. Hover or focus to provoke it."><use href="#scarycat" transform="translate(430 478) scale(.85)"/></g>
       <g class="grave" tabindex="0" role="button" aria-label="Gravestone. Hover or focus to raise a ghost."><g transform="translate(250 505)"><g class="gh"><use href="#ghost"/></g><use href="#tomb" class="sil2"/></g></g>
       <g class="grave" tabindex="0" role="button" aria-label="Gravestone. Hover or focus to raise a ghost."><g transform="translate(580 500) scale(1.2)"><g class="gh"><use href="#ghost"/></g><use href="#tomb" class="sil2"/></g></g>
@@ -153,7 +159,7 @@
       <g class="orb" style="--d:-1s"><circle cx="340" cy="380" r="6"/></g><g class="orb" style="--d:-2.4s"><circle cx="720" cy="340" r="5"/></g><g class="orb" style="--d:-3.6s"><circle cx="1010" cy="410" r="7"/></g>
       <use href="#kidwalk" x="150" y="525" style="--t:34s;--d:-10s"/>
       <use href="#catwalk" x="60" y="560" style="--t:34s;--d:-13s"/>
-      <ellipse class="fog drift" cx="400" cy="540" rx="480" ry="55" style="--t:38s"/>
+      <g class="fl"><g class="evil"><use href="#jack" transform="translate(1110 548) scale(1.5)"/></g></g><g class="fl" style="--d:-.7s"><g class="evil"><use href="#jack" transform="translate(120 556) scale(1.2)"/></g></g><g class="cornhop"><use href="#cornpile" x="880" y="560"/></g><use href="#spidercrawl" x="0" y="575" style="--t:20s;--d:-9s"/><use href="#spidercrawl" x="0" y="555" style="--t:28s;--d:-2s"/><ellipse class="fog drift" cx="400" cy="540" rx="480" ry="55" style="--t:38s"/>
       <ellipse class="fog drift" cx="950" cy="575" rx="460" ry="50" style="--t:52s;--d:-20s"/>
       <g class="fall" style="--d:-3s"><use href="#leaf" x="300" y="0"/></g><g class="fall" style="--t:12s;--d:-7s"><use href="#leaf" x="820" y="0"/></g>
     </svg>
@@ -172,14 +178,14 @@
       <ellipse class="cloud drift" cx="950" cy="170" rx="320" ry="38" style="--t:60s;--d:-25s"/>
       <path class="bolt" d="M200 140 172 250 204 244 162 360 230 230 196 236Z" style="animation-delay:-3s"/>
       <use href="#witchfly" x="600" y="230" style="--t:10s;--d:-4s" class="sil"/>
-      <use href="#owlfly" x="300" y="330" style="--t:16s;--d:-2s" class="sil"/>
+      <use href="#witchfly" x="0" y="120" style="--t:12s;--d:-2s;--dir:reverse" class="sil"/><use href="#ghostfly" x="0" y="380" style="--t:32s;--d:-10s"/><use href="#owlfly" x="300" y="330" style="--t:16s;--d:-2s" class="sil"/>
       <use href="#owlfly" x="800" y="150" style="--t:21s;--d:-12s" class="sil"/>
       <use href="#batfly" x="100" y="90" style="--t:8s;--d:-1s" class="sil"/><use href="#batfly" x="600" y="60" style="--t:9s;--d:-5s" class="sil"/><use href="#batfly" x="900" y="300" style="--t:12s;--d:-8s;--dir:reverse" class="sil"/>
       <use href="#treerun" x="200" y="500" style="--t:26s;--d:-4s" class="sil2"/><use href="#treerun" x="640" y="500" style="--t:26s;--d:-14s" class="sil2"/><use href="#treerun" x="1000" y="500" style="--t:26s;--d:-21s" class="sil2"/>
       <path class="gnd" d="M0 515Q300 495 600 515T1200 508V600H0Z"/>
       <use href="#eyes" x="300" y="470" class="blinkeyes"/><use href="#eyes" x="880" y="455" class="blinkeyes" style="--d:-7s"/><use href="#eyes" x="60" y="300" class="blinkeyes" style="--d:-4s"/>
       <use href="#wagon" x="400" y="562" style="--t:20s;--d:-6s" class="sil"/>
-      <ellipse class="fog drift" cx="500" cy="545" rx="500" ry="55" style="--t:34s"/>
+      <g class="devilg" style="--eye:#ff1a1a"><use href="#devil" transform="translate(1090 540) scale(.85)"/></g><g class="fl"><g class="evil"><use href="#jack" transform="translate(90 550) scale(1.3)"/></g></g><g class="cornhop"><use href="#cornpile" x="240" y="560"/></g><use href="#spidercrawl" x="0" y="580" style="--t:18s;--d:-7s"/><ellipse class="fog drift" cx="500" cy="545" rx="500" ry="55" style="--t:34s"/>
       <ellipse class="fog drift" cx="1000" cy="575" rx="420" ry="45" style="--t:46s;--d:-10s"/>
       <g class="fall" style="--d:-1s"><use href="#leaf" x="150" y="0"/></g><g class="fall" style="--t:11s;--d:-5s"><use href="#leaf" x="560" y="0"/></g><g class="fall" style="--t:9s;--d:-7s"><use href="#leaf" x="960" y="0"/></g>
       <rect class="flash" width="1200" height="600" style="animation-delay:-3s"/>
@@ -189,6 +195,6 @@
 </section>
 
 </main>
-<footer><svg class="foot" viewBox="-40 -34 80 66" width="36" height="30" aria-hidden="true" focusable="false"><use href="#jack"/></svg><p>100% HTML and CSS. No JavaScript. <a href="submission_Template_halloween.html">Submission details</a></p></footer>
+<footer><svg class="foot" viewBox="-40 -34 80 66" width="36" height="30" aria-hidden="true" focusable="false"><use href="#jack"/></svg></footer>
 </body>
 </html>
