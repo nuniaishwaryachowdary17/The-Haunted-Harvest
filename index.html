@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Haunted Harvest</title>
+<meta name="description" content="A CSS-only animated Halloween experience in three chapters.">
+<link rel="icon" type="image/svg+xml" href="assets/images/pumpkin.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="haunted-harvest.css">
+</head>
+<body>
+<input type="checkbox" id="dark" class="sr">
+<a class="skip" href="#content">Skip to scene</a>
+
+<!-- Shared artwork: every character is vector art reused with <use> -->
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false"><defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop class="k0" offset="0"/><stop class="k1" offset=".55"/><stop class="k2" offset="1"/></linearGradient>
+  <radialGradient id="moonG"><stop class="m1" offset="0"/><stop class="m2" offset="1"/></radialGradient>
+  <linearGradient id="beamG" x1="0" x2="1"><stop class="b1" offset="0"/><stop class="b2" offset="1"/></linearGradient>
+  <filter id="blur" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+  <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+
+  <g id="stars" class="stars"><circle cx="80" cy="60" r="1.6"/><circle cx="220" cy="130" r="1.2"/><circle cx="330" cy="40" r="1.8"/><circle cx="480" cy="110" r="1.3"/><circle cx="620" cy="50" r="1.6"/><circle cx="760" cy="140" r="1.2"/><circle cx="900" cy="70" r="1.8"/><circle cx="1040" cy="30" r="1.3"/><circle cx="1140" cy="120" r="1.6"/><circle cx="560" cy="170" r="1.2"/></g>
+  <g id="bat"><path d="M0 4C-6-6-16-12-30-8-24-2-22 4-18 8-12 4-6 6 0 10 6 6 12 4 18 8 22 4 24-2 30-8 16-12 6-6 0 4Z"/><path d="M-4 5-3-5 0 1 3-5 4 5Z"/></g>
+  <g id="crow"><path d="M-26 4-10-6Q2-14 14-8L32-12 22-2Q10 9-6 8Z"/><path d="M-2-4-18-24 6-10Z"/></g>
+  <g id="leaf"><path class="lf" d="M0 0Q8-10 16 0 8 10 0 0Z"/></g>
+  <g id="ghost"><path class="gf" d="M0-44Q-30-44-30-12V44Q-22 32-15 44-7 32 0 44 7 32 15 44 22 32 30 44V-12Q30-44 0-44Z"/><ellipse class="hole" cx="-10" cy="-16" rx="5" ry="9"/><ellipse class="hole" cx="10" cy="-16" rx="5" ry="9"/><ellipse class="hole" cx="0" cy="8" rx="6" ry="11"/></g>
+  <g id="jack"><ellipse class="pk" rx="36" ry="29"/><path class="pk2" d="M-12-26Q0-40 12-26L4-22H-4Z"/><path class="face" d="M-22-8-8-8-15-20ZM8-8 22-8 15-20ZM-20 6-11 15-4 8 0 17 4 8 11 15 20 6 14 22H-14Z"/></g>
+  <g id="kid"><path class="sil" d="M-9-34a9 9 0 1 1 18 0 9 9 0 0 1-18 0ZM-13-24H13L19 22H-19Z"/><path class="sil" d="M-12-40 0-62 12-40Z"/><g class="l1"><line class="ln" x1="-7" y1="22" x2="-7" y2="48"/></g><g class="l2"><line class="ln" x1="7" y1="22" x2="7" y2="48"/></g><line class="ln" x1="12" y1="-8" x2="26" y2="6"/><circle class="lamp" cx="29" cy="12" r="7"/></g>
+  <g id="cat"><ellipse class="sil" rx="22" ry="11"/><circle class="sil" cx="26" cy="-8" r="10"/><path class="sil" d="M19-14 20-28 27-17ZM28-17 35-28 36-12Z"/><path class="ln" stroke-width="5" d="M-20-4Q-42-8-36-30"/><g class="l1"><line class="ln" x1="-12" y1="8" x2="-12" y2="24"/></g><g class="l2"><line class="ln" x1="14" y1="8" x2="14" y2="24"/></g><circle class="eye" cx="24" cy="-9" r="2.6"/><circle class="eye" cx="32" cy="-9" r="2.6"/></g>
+  <g id="owl"><ellipse class="sil" rx="17" ry="24"/><path class="sil" d="M-14-16-16-32-4-22ZM14-16 16-32 4-22Z"/><circle class="eye yel" cx="-7" cy="-8" r="6"/><circle class="eye yel" cx="7" cy="-8" r="6"/><path class="sil" d="M-24 0-46-10-30 14ZM24 0 46-10 30 14Z"/></g>
+  <g id="tree"><path class="ln" stroke-width="12" d="M0 0V-150M0-60-44-112-50-160M-44-112-78-124M0-96 40-144 34-196M40-144 72-152M0-134-22-196"/><path class="ln" stroke-width="5" d="M-50-160-66-186M34-196 52-222M-22-196-36-224"/></g>
+  <g id="mansion"><path d="M0 0V-150L15-170V-230L35-260 55-230V-170L85-190V-270L100-330 115-270V-180H190V-240L215-285 240-240V-140H300V0Z"/></g>
+  <g id="tomb"><path class="tomb" d="M-22 0V-50Q-22-72 0-72T22-50V0Z"/><path class="ln eng" stroke-width="3" d="M0-56V-30M-8-48H8"/></g>
+  <g id="hand"><path class="bone" d="M-14 0V-30H14V0Z"/><rect class="bone f1" x="-14" y="-62" width="5" height="34" rx="2"/><rect class="bone f2" x="-6" y="-70" width="5" height="42" rx="2"/><rect class="bone f3" x="2" y="-66" width="5" height="38" rx="2"/><rect class="bone f4" x="10" y="-56" width="5" height="30" rx="2"/></g>
+  <g id="spider"><line class="thread" x1="0" y1="-600" x2="0" y2="0"/><circle class="sil2" r="9"/><circle class="sil2" cy="-10" r="6"/><path class="ln" stroke-width="2" d="M-8-2-24-14M-8 2-26 6M-7 6-22 20M-4 8-12 24M8-2 24-14M8 2 26 6M7 6 22 20M4 8 12 24"/></g>
+  <g id="eyes"><ellipse class="ev" cx="-8" rx="4" ry="2.5"/><ellipse class="ev" cx="8" rx="4" ry="2.5"/></g>
+  <g id="wheel"><circle class="sil" r="17"/><g class="spin"><path class="ln spk" stroke-width="3" d="M-13 0H13M0-13V13M-9-9 9 9M-9 9 9-9"/></g></g>
+  <g id="witch"><path class="ln" stroke-width="5" d="M-66 6H64"/><path class="ln" stroke-width="3" d="M-66 6-92-2M-66 6-94 6M-66 6-92 14"/><path class="sil" d="M-14 4Q-10-26 6-28L18 2Z"/><circle class="sil" cx="10" cy="-36" r="8"/><path class="sil" d="M-4-42 14-76 22-42ZM-8-42H28Z"/></g>
+
+  <g id="scarycat"><g class="breathe">
+    <g class="tail"><path class="ln" stroke-width="18" d="M-58-70C-108-74-122-128-92-162"/></g>
+    <path class="ln" stroke-width="10" d="M-48-44-52 0M-26-44-24 0M42-44 46 0M62-44 72 0"/>
+    <path class="sil rim" d="M-62-44C-68-98-10-130 36-114 66-104 72-72 66-44Z"/>
+    <path class="ln bristle" stroke-width="5" d="M-50-96-44-112-38-98-30-118-22-102-12-124-4-106 6-126 14-108 24-124 30-106 42-112"/>
+    <g class="headjerk">
+      <circle class="sil rim" cx="88" cy="-66" r="25"/>
+      <path class="sil rim" d="M68-84 70-120 90-94ZM94-92 114-118 112-82Z"/>
+      <ellipse class="mouth" cx="104" cy="-54" rx="12" ry="7"/>
+      <path class="fang" d="M96-56 100-42 104-56ZM106-56 110-42 114-56Z"/>
+      <ellipse class="eyeglow" cx="83" cy="-74" rx="7" ry="5"/><ellipse class="eyeglow" cx="102" cy="-76" rx="7" ry="5"/>
+      <path class="slit" d="M83-79V-69M102-81V-71"/>
+      <path class="whisk" d="M112-62 150-70M112-58 152-56M112-54 148-42"/>
+    </g></g></g>
+
+  <!-- animated compounds (motion is set in haunted-harvest.css) -->
+  <g id="batfly"><g class="mv"><g class="bobY"><g class="flap"><use href="#bat"/></g></g></g></g>
+  <g id="crowfly"><g class="mv"><g class="bobY"><g class="flap"><use href="#crow"/></g></g></g></g>
+  <g id="owlfly"><g class="mv"><g class="bobY"><g class="flap"><use href="#owl"/></g></g></g></g>
+  <g id="kidwalk"><g class="mv slow"><g class="bob"><use href="#kid"/></g></g></g>
+  <g id="catwalk"><g class="mv slow"><g class="bob"><use href="#cat"/></g></g></g>
+  <g id="witchfly"><g class="mv"><g class="bobY"><use href="#witch"/><circle class="spark" cx="-98" cy="6" r="4"/><circle class="spark s2" cx="-98" cy="6" r="3"/><circle class="spark s3" cx="-98" cy="6" r="5"/></g></g></g>
+  <g id="hearse"><g class="mv"><g class="bob"><path class="beam" d="M232-30 520-90V20Z"/><path class="sil" d="M0-6V-58H120L140-80H210L234-46V-6Z"/><path class="win" d="M10-52H112L126-70H136L120-52Z"/><path class="coffin" d="M16-50H108V-28H16Z"/><circle class="lamp" cx="232" cy="-30" r="6"/><use href="#wheel" x="48" y="-4"/><use href="#wheel" x="188" y="-4"/></g></g></g>
+  <g id="wagon"><g class="mv wag"><g class="bob"><path class="sil" d="M0-30H150L138-8H12ZM-50-30 0-30 0-18-44-18Z"/><use href="#jack" transform="translate(40 -50) scale(.8)"/><use href="#jack" transform="translate(100 -48) scale(.7)"/><use href="#kid" transform="translate(-34 -60) scale(.8)"/><use href="#wheel" x="34" y="0"/><use href="#wheel" x="116" y="0" /></g></g></g>
+  <g id="treerun"><g class="mv slower"><use href="#tree"/></g></g>
+</defs></svg>
+
+<header class="top">
+  <h1><img class="emblem" src="assets/images/black-cat.svg" alt="" width="56" height="56"> The Haunted Harvest <img class="emblem r" src="assets/images/black-cat.svg" alt="" width="56" height="56"></h1>
+  <nav aria-label="Choose a chapter">
+    <a href="#town">1 · The Square</a>
+    <a href="#graveyard">2 · The Graveyard</a>
+    <a href="#broom">3 · The Ride</a>
+    <label for="dark" class="btn">Blow out the candles</label>
+  </nav>
+</header>
+
+<main id="content" class="scenes">
+
+<!-- CHAPTER 1 -->
+<section class="scene" id="town" aria-labelledby="t1">
+  <div class="stage"><img class="web" src="assets/images/cobweb.svg" alt=""><img class="web r" src="assets/images/cobweb.svg" alt="">
+    <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMax slice" role="img" aria-label="A night street below a haunted mansion. A blood-red moon rises behind a witch and crows. Lightning flashes, fog rolls, costumed children walk past, a hearse drives by, and a figure watches from a window.">
+      <rect width="1200" height="600" fill="url(#sky)"/>
+      <use href="#stars"/>
+      <circle class="moon pulse" cx="330" cy="170" r="105"/>
+      <use href="#witchfly" x="330" y="150" style="--t:16s;--d:-5s"/>
+      <use href="#crowfly" x="120" y="90" style="--t:19s;--d:-4s" class="sil"/>
+      <use href="#crowfly" x="260" y="210" style="--t:24s;--d:-13s" class="sil"/>
+      <use href="#batfly" x="600" y="110" style="--t:11s;--d:-2s" class="sil"/>
+      <use href="#batfly" x="500" y="260" style="--t:14s;--d:-7s;--dir:reverse" class="sil"/>
+      <use href="#batfly" x="900" y="180" style="--t:9s;--d:-5s" class="sil"/>
+      <ellipse class="cloud drift" cx="300" cy="80" rx="320" ry="36" style="--t:50s"/>
+      <ellipse class="cloud drift" cx="900" cy="130" rx="280" ry="30" style="--t:70s;--d:-20s"/>
+      <path class="bolt" d="M960 100 930 210 962 204 920 330 988 190 954 196Z"/>
+      <use href="#mansion" x="780" y="500" class="sil2"/>
+      <rect class="win fl" x="874" y="250" width="12" height="22"/><rect class="win fl" x="980" y="330" width="14" height="24" style="--d:-.8s"/>
+      <rect class="win fl" x="810" y="390" width="14" height="24" style="--d:-1.3s"/><rect class="win fl" x="1030" y="410" width="14" height="24" style="--d:-.3s"/>
+      <path class="sil fig" d="M984 340a3 3 0 1 1 6 0l2 14h-10z"/><rect class="win door" x="910" y="440" width="24" height="60"/>
+      <use href="#eyes" x="1100" y="470" class="blinkeyes"/>
+      <path class="gnd" d="M0 505Q300 485 600 505T1200 498V600H0Z"/>
+      <rect class="sil2" x="50" y="462" width="300" height="60" rx="4"/><rect class="sil2" x="40" y="454" width="320" height="10" rx="3"/>
+      <g class="boo" tabindex="0" role="button" aria-label="A hissing black cat. Hover or focus to provoke it."><use href="#scarycat" transform="translate(190 454) scale(.85)"/></g>
+      <g class="fl"><use href="#jack" x="860" y="492" transform="scale(1)"/></g>
+      <g class="fl" style="--d:-.6s"><use href="#jack" x="1010" y="498"/></g>
+      <g class="fl" style="--d:-1.1s"><use href="#jack" x="80" y="500"/></g>
+      <use href="#kidwalk" x="200" y="490" style="--t:30s;--d:-3s"/>
+      <use href="#kidwalk" x="120" y="505" style="--t:30s;--d:-5.2s"/>
+      <use href="#kidwalk" x="300" y="495" style="--t:30s;--d:-7s"/>
+      <use href="#catwalk" x="420" y="540" style="--t:22s;--d:-9s"/>
+      <use href="#hearse" x="560" y="590" style="--t:15s;--d:-8s"/>
+      <ellipse class="fog drift" cx="300" cy="520" rx="420" ry="48" style="--t:35s"/>
+      <ellipse class="fog drift" cx="900" cy="560" rx="460" ry="56" style="--t:48s;--d:-14s"/>
+      <g class="fall" style="--d:-2s"><use href="#leaf" x="100" y="0"/></g><g class="fall" style="--t:12s;--d:-6s"><use href="#leaf" x="420" y="0"/></g><g class="fall" style="--t:8s;--d:-4s"><use href="#leaf" x="700" y="0"/></g>
+      <rect class="flash" width="1200" height="600"/>
+    </svg>
+  </div>
+  <div class="caption"><h2 id="t1">Chapter 1: The Square</h2><p>The lamps are dying. Something moves behind the glass of the old house, and the hearse is driving with its lights on.</p><a class="btn" href="#graveyard">Follow the cat</a></div>
+</section>
+
+<!-- CHAPTER 2 -->
+<section class="scene" id="graveyard" aria-labelledby="t2">
+  <div class="stage"><img class="web" src="assets/images/cobweb.svg" alt=""><img class="web r" src="assets/images/cobweb.svg" alt="">
+    <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMax slice" role="group" aria-label="A graveyard at night. Skeletal hands claw out of the earth, a spider drops on a thread, a hooded visitor carries a lantern with a black cat behind, and ghosts rise when a gravestone is hovered or focused.">
+      <rect width="1200" height="600" fill="url(#sky)"/>
+      <use href="#stars"/>
+      <circle class="moon pulse" cx="900" cy="150" r="90"/>
+      <ellipse class="cloud drift" cx="600" cy="90" rx="380" ry="34" style="--t:55s"/>
+      <use href="#crowfly" x="200" y="120" style="--t:22s;--d:-6s" class="sil"/>
+      <use href="#batfly" x="700" y="220" style="--t:10s;--d:-3s" class="sil"/>
+      <use href="#batfly" x="400" y="90" style="--t:13s;--d:-9s;--dir:reverse" class="sil"/>
+      <g class="sway"><use href="#tree" x="90" y="510"/></g>
+      <g class="sway" style="--d:-2s"><use href="#tree" x="1090" y="520" transform="scale(1.1)"/></g>
+      <use href="#eyes" x="92" y="400" class="blinkeyes"/>
+      <use href="#spider" x="690" y="0" class="dangle sil2"/>
+      <path class="gnd" d="M0 500Q300 470 600 495T1200 485V600H0Z"/>
+      <g class="hand" style="--d:-2s"><use href="#hand" x="430" y="520"/></g>
+      <g class="hand" style="--d:-5s"><use href="#hand" x="780" y="525"/></g>
+      <path class="gnd" d="M0 520Q300 505 600 520T1200 515V600H0Z"/>
+      <rect class="sil2" x="320" y="478" width="230" height="44" rx="4"/>
+      <g class="boo" tabindex="0" role="button" aria-label="A hissing black cat. Hover or focus to provoke it."><use href="#scarycat" transform="translate(430 478) scale(.85)"/></g>
+      <g class="grave" tabindex="0" role="button" aria-label="Gravestone. Hover or focus to raise a ghost."><g transform="translate(250 505)"><g class="gh"><use href="#ghost"/></g><use href="#tomb" class="sil2"/></g></g>
+      <g class="grave" tabindex="0" role="button" aria-label="Gravestone. Hover or focus to raise a ghost."><g transform="translate(580 500) scale(1.2)"><g class="gh"><use href="#ghost"/></g><use href="#tomb" class="sil2"/></g></g>
+      <g class="grave" tabindex="0" role="button" aria-label="Gravestone. Hover or focus to raise a ghost."><g transform="translate(950 505)"><g class="gh"><use href="#ghost"/></g><use href="#tomb" class="sil2"/></g></g>
+      <g class="orb" style="--d:-1s"><circle cx="340" cy="380" r="6"/></g><g class="orb" style="--d:-2.4s"><circle cx="720" cy="340" r="5"/></g><g class="orb" style="--d:-3.6s"><circle cx="1010" cy="410" r="7"/></g>
+      <use href="#kidwalk" x="150" y="525" style="--t:34s;--d:-10s"/>
+      <use href="#catwalk" x="60" y="560" style="--t:34s;--d:-13s"/>
+      <ellipse class="fog drift" cx="400" cy="540" rx="480" ry="55" style="--t:38s"/>
+      <ellipse class="fog drift" cx="950" cy="575" rx="460" ry="50" style="--t:52s;--d:-20s"/>
+      <g class="fall" style="--d:-3s"><use href="#leaf" x="300" y="0"/></g><g class="fall" style="--t:12s;--d:-7s"><use href="#leaf" x="820" y="0"/></g>
+    </svg>
+  </div>
+  <div class="caption"><h2 id="t2">Chapter 2: The Graveyard</h2><p>The ground is not as still as it looks. Hover or tab to a gravestone and see who answers.</p><a class="btn" href="#broom">Fly away</a></div>
+</section>
+
+<!-- CHAPTER 3 -->
+<section class="scene" id="broom" aria-labelledby="t3">
+  <div class="stage"><img class="web" src="assets/images/cobweb.svg" alt=""><img class="web r" src="assets/images/cobweb.svg" alt="">
+    <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMax slice" role="img" aria-label="A witch on a broom trails sparks across a huge moon. Owls and bats fly through the storm clouds while a hay wagon full of jack-o'-lanterns rattles along a dark road lined with dead trees.">
+      <rect width="1200" height="600" fill="url(#sky)"/>
+      <use href="#stars"/>
+      <circle class="moon pulse" cx="600" cy="230" r="170"/>
+      <ellipse class="cloud drift" cx="250" cy="110" rx="340" ry="40" style="--t:40s"/>
+      <ellipse class="cloud drift" cx="950" cy="170" rx="320" ry="38" style="--t:60s;--d:-25s"/>
+      <path class="bolt" d="M200 140 172 250 204 244 162 360 230 230 196 236Z" style="animation-delay:-3s"/>
+      <use href="#witchfly" x="600" y="230" style="--t:10s;--d:-4s" class="sil"/>
+      <use href="#owlfly" x="300" y="330" style="--t:16s;--d:-2s" class="sil"/>
+      <use href="#owlfly" x="800" y="150" style="--t:21s;--d:-12s" class="sil"/>
+      <use href="#batfly" x="100" y="90" style="--t:8s;--d:-1s" class="sil"/><use href="#batfly" x="600" y="60" style="--t:9s;--d:-5s" class="sil"/><use href="#batfly" x="900" y="300" style="--t:12s;--d:-8s;--dir:reverse" class="sil"/>
+      <use href="#treerun" x="200" y="500" style="--t:26s;--d:-4s" class="sil2"/><use href="#treerun" x="640" y="500" style="--t:26s;--d:-14s" class="sil2"/><use href="#treerun" x="1000" y="500" style="--t:26s;--d:-21s" class="sil2"/>
+      <path class="gnd" d="M0 515Q300 495 600 515T1200 508V600H0Z"/>
+      <use href="#eyes" x="300" y="470" class="blinkeyes"/>
+      <use href="#wagon" x="400" y="562" style="--t:20s;--d:-6s" class="sil"/>
+      <ellipse class="fog drift" cx="500" cy="545" rx="500" ry="55" style="--t:34s"/>
+      <ellipse class="fog drift" cx="1000" cy="575" rx="420" ry="45" style="--t:46s;--d:-10s"/>
+      <g class="fall" style="--d:-1s"><use href="#leaf" x="150" y="0"/></g><g class="fall" style="--t:11s;--d:-5s"><use href="#leaf" x="560" y="0"/></g><g class="fall" style="--t:9s;--d:-7s"><use href="#leaf" x="960" y="0"/></g>
+      <rect class="flash" width="1200" height="600" style="animation-delay:-3s"/>
+    </svg>
+  </div>
+  <div class="caption"><h2 id="t3">Chapter 3: The Ride</h2><p>Above the tree line the witch burns a trail across the moon while the wagon below carries its grinning cargo home. The owls are following both.</p><a class="btn" href="#town">Back to the square</a></div>
+</section>
+
+</main>
+<footer><img class="foot" src="assets/images/pumpkin.svg" alt="" width="32" height="28"><p>100% HTML and CSS. No JavaScript. <a href="submission_Template_halloween.html">Submission details</a></p></footer>
+</body>
+</html>
